@@ -13,9 +13,9 @@
 ////   - max(A) = 9 < 10 = max(B)
 import 'dart:math';
 
-bool checkDolls(List<int> doll1, List<int> doll2){
-  return doll1.reduce(min) > doll2.reduce(min)
-      && doll1.reduce(max) < doll2.reduce(max);
+bool checkDolls(List<int> doll1, List<int> doll2) {
+  return doll1.reduce(min) > doll2.reduce(min) &&
+      doll1.reduce(max) < doll2.reduce(max);
 }
 //  List minimum = [];
 //  List maximum = [];
@@ -31,23 +31,34 @@ bool checkDolls(List<int> doll1, List<int> doll2){
 //  if(flat.length == flat.toSet().length){
 //    return false;
 //  }
-bool Matroyshka (List<List<int>> dolls){
-  if(dolls.length == 1) return false;
+bool Matroyshka(List<List<int>> dolls) {
+  if (dolls.length == 1) return false;
 
   dolls.sort((a, b) => b.reduce(min).compareTo(a.reduce(min)));
-  int count = 0;
-  for (int i = 0; i < dolls.length - 1; i++){
-    if(checkDolls(dolls[i], dolls[i + 1])){
-      count++;
-    };
+  for (int i = 0; i < dolls.length - 1; i++) {
+    if (!checkDolls(dolls[i], dolls[i + 1])) {
+      return false;
     }
-  return (count >= dolls.length - 1);
+    ;
+  }
+  return true;
 }
 
 /// Create a function that returns true if every single sub-array inside an array
 /// can be nested Matroyshka style, and false otherwise.
 main() {
-  print(Matroyshka([[8,57],[4,89],[15,43]]));
-  print(Matroyshka([[1,10,6],[4,8,2],[5]]));
-  print(Matroyshka([[2],[3]]));
+  print(Matroyshka([
+    [8, 57],
+    [4, 89],
+    [15, 43]
+  ]));
+  print(Matroyshka([
+    [1, 10, 6],
+    [4, 8, 2],
+    [5]
+  ]));
+  print(Matroyshka([
+    [2],
+    [3]
+  ]));
 }
